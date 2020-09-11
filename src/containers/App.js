@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Person from './Person/Person';
+import Person from '../components/Persons/Person/Person';
 import classes from './App.css';
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
+import Persons from '../components/Persons/Persons';
+import Cookpit from '../components/Cookpit/Cookpit'
 
 class App extends Component {
   state = {
@@ -43,41 +44,20 @@ class App extends Component {
 
   render() {
     let persons = null;
-    let btnClass = '';
     if (this.state.showPersons) {
-      persons = (
-        <div>
-          {this.state.persons.map((person, index) => {
-            return <ErrorBoundary key={person.id}>
-              <Person
-                clicked={() => this.deletePersonHandler(index)}
-                changed={(event) => this.nameChangedHandler(event, person.id)}
-                name={person.name}
-                age={person.age} />
-            </ErrorBoundary>
-          })}
-        </div>
-      );
-      btnClass = classes.Red;
+      persons = <Persons
+        persons={this.state.persons}
+        clicked={this.deletePersonHandler}
+        changed={this.nameChangedHandler}
+      />;
     }
-    // let classes = ['red', 'blue'].join(' ');
-    const assignedClasses = [];
-    if (this.state.persons.length <= 2) {
-      assignedClasses.push(classes.red);
 
-    }
-    if (this.state.persons.length <= 1) {
-      assignedClasses.push(classes.bold);
-
-    }
     return (
       <div className={classes.App}>
-        <h1>Hi, I am react app</h1>
-        <p className={assignedClasses.join(' ')}>this is working</p>
-        <p>{this.state.otherState}</p>
-        <button className={btnClass} onClick={this.togglePersonHandler}>
-          Toggle
-          </button>
+        <Cookpit
+          showPersons={this.state.showPersons}
+          persons={this.state.persons}
+          clicked={this.togglePersonHandler} />
         {persons}
       </div>
     );

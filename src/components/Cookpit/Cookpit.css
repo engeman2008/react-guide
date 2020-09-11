@@ -1,31 +1,27 @@
-.App {
-  text-align: center;
-}
-
 .red{
-  color:red;
-
-}
-
-.bold{
-  font-weight: bold;
-}
-
-.App button
+    color:red;
+  
+  }
+  
+  .bold{
+    font-weight: bold;
+  }
+  
+.Cookpit button
 {
   background-color: green;
   color: white;
   border: 1px solid #eee;
   padding: 8px;
 }
-.App button:hover {
+.Cookpit button:hover {
   background-color: lightgreen;
   color: black;
 }
 
-.App button.Red{
+.Cookpit button.Red{
   background-color: red;
 }
-.App button.Red:hover {
+.Cookpit button.Red:hover {
   background-color: salmon;
 }
