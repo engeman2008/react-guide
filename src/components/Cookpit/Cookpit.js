@@ -17,7 +17,7 @@ const cookpit = (props) => {
     }
     return (
         <div className={classes.Cookpit}>
-            <h1>Hi, I am react app</h1>
+            <h1>{props.title}</h1>
             <p className={assignedClasses.join(' ')}>this is working</p>
             <button className={btnClass} onClick={props.clicked}>
                 Toggle

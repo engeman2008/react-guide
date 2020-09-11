@@ -2,6 +2,7 @@ import React from 'react';
 import Person from './Person/Person';
 
 const persons = (props) => props.persons.map((person, index) => {
+    console.log('Persons.js render');
     return <Person
         clicked={() => props.clicked(index)}
         changed={(event) => props.changed(event, person.id)}

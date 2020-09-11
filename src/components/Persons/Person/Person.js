@@ -4,7 +4,7 @@ import './Person.css';
 import classes from './Person.css';
 
 const person = props => {
-
+    console.log('Person.js render');
     return (
        
         <div className={classes.Person}>

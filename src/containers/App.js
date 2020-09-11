@@ -5,6 +5,12 @@ import Persons from '../components/Persons/Persons';
 import Cookpit from '../components/Cookpit/Cookpit'
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    console.log('Apps js constructor');
+  }
+
   state = {
     persons: [
       { id: '1', name: 'Mustafa', age: '30' },
@@ -12,6 +18,16 @@ class App extends Component {
       { id: '3', name: 'Younes', age: '1' },
     ],
     otherState: 'toggle ok'
+  };
+  
+  static getDerivedSatetFromProps(props, state){
+    console.log('App.js getDerivedSatetFromProps')
+    return state;
+  }
+
+  componentDidMount = () => {
+    console.log('App.js did mount')
+
   };
 
   nameChangedHandler = (event, id) => {
@@ -43,6 +59,7 @@ class App extends Component {
   };
 
   render() {
+    console.log('App.js render')
     let persons = null;
     if (this.state.showPersons) {
       persons = <Persons
@@ -55,6 +72,7 @@ class App extends Component {
     return (
       <div className={classes.App}>
         <Cookpit
+          title={this.props.appTitle}
           showPersons={this.state.showPersons}
           persons={this.state.persons}
           clicked={this.togglePersonHandler} />
