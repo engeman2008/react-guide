@@ -3,6 +3,7 @@ import React, {Fragment} from 'react';
 import './Person.css';
 import classes from './Person.css';
 import Aux from '../../../hoc/Aux'
+import PropTypes from 'prop-types';
 
 const person = props => {
     console.log('Person.js render');
@@ -16,5 +17,12 @@ const person = props => {
         </Fragment>
     );
 };
+
+person.PropTypes = {
+    clicked: PropTypes.func,
+    name: PropTypes.string,
+    age: PropTypes.number,
+    changed: PropTypes.func
+}
 
 export default person;
