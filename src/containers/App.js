@@ -1,15 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Person from '../components/Persons/Person/Person';
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cookpit from '../components/Cookpit/Cookpit'
+import WithClass from '../hoc/WithClass';
 
-class App extends Component {
-
-  constructor(props) {
-    super(props);
-    console.log('Apps js constructor');
-  }
+class App extends PureComponent {
 
   state = {
     persons: [
@@ -17,18 +13,16 @@ class App extends Component {
       { id: '2', name: 'Yahya', age: '2' },
       { id: '3', name: 'Younes', age: '1' },
     ],
-    otherState: 'toggle ok'
+    otherState: 'toggle ok',
+    changeCounter: 0
   };
-  
-  static getDerivedSatetFromProps(props, state){
-    console.log('App.js getDerivedSatetFromProps')
-    return state;
-  }
 
   componentDidMount = () => {
     console.log('App.js did mount')
-
   };
+  componentDidUpdate = () => {
+    console.log('App.js did update');
+  }
 
   nameChangedHandler = (event, id) => {
     // const personIndex = this.state.persons.find(p => p.id === id);
@@ -41,7 +35,10 @@ class App extends Component {
 
     const persons = [...this.state.persons];
     persons[personIndex] = person;
-    this.setState({ persons: persons });
+    // this.setState({ persons: persons, changeCounter: this.state.changeCounter + 1 });
+    this.setState((prevState, props) => {
+        return { persons: persons, changeCounter: prevState.changeCounter + 1 }
+    });
   }
 
   deletePersonHandler = (personIndex) => {
@@ -70,14 +67,14 @@ class App extends Component {
     }
 
     return (
-      <div className={classes.App}>
+      <WithClass classes={classes.App}>
         <Cookpit
           title={this.props.appTitle}
           showPersons={this.state.showPersons}
-          persons={this.state.persons}
+          personsLength={this.state.persons.length}
           clicked={this.togglePersonHandler} />
         {persons}
-      </div>
+      </WithClass>
     );
   }
 }

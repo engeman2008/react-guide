@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classes from './Cookpit.css'
 
 const cookpit = (props) => {
+
+    useEffect(() => {
+        console.log('cookpit useeffect')
+        return () => {
+            console.log('cookpit useeffect clean')
+        };
+    });
+
     // let classes = ['red', 'blue'].join(' ');
     const assignedClasses = [];
     let btnClass = '';
@@ -9,10 +17,10 @@ const cookpit = (props) => {
         btnClass = classes.Red;
     }
 
-    if (props.persons.length <= 2) {
+    if (props.personsLength <= 2) {
         assignedClasses.push(classes.red);
     }
-    if (props.persons.length <= 1) {
+    if (props.personsLength <= 1) {
         assignedClasses.push(classes.bold);
     }
     return (
@@ -26,4 +34,4 @@ const cookpit = (props) => {
     );
 };
 
-export default cookpit;
+export default React.memo(cookpit);
