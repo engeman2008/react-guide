@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
-import Person from '../components/Persons/Person/Person';
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cookpit from '../components/Cookpit/Cookpit'
 import WithClass from '../hoc/WithClass';
+import AuthContext from '../context/auth-context'
 
 class App extends PureComponent {
 
@@ -38,7 +38,7 @@ class App extends PureComponent {
     persons[personIndex] = person;
     // this.setState({ persons: persons, changeCounter: this.state.changeCounter + 1 });
     this.setState((prevState, props) => {
-        return { persons: persons, changeCounter: prevState.changeCounter + 1 }
+      return { persons: persons, changeCounter: prevState.changeCounter + 1 }
     });
   }
 
@@ -57,7 +57,7 @@ class App extends PureComponent {
   };
 
   loginHandler = () => {
-    this.setState({authenticated: true});
+    this.setState({ authenticated: true });
   };
 
   render() {
@@ -73,15 +73,19 @@ class App extends PureComponent {
     }
 
     return (
-      <WithClass classes={classes.App}>
-        <Cookpit
-          title={this.props.appTitle}
-          showPersons={this.state.showPersons}
-          personsLength={this.state.persons.length}
-          clicked={this.togglePersonHandler}
-          login={this.loginHandler} />
-        {persons}
-      </WithClass>
+      <AuthContext.Provider value={{
+        authenticated : this.state.authenticated,
+        login: this.loginHandler
+      }}>
+        <WithClass classes={classes.App}>
+          <Cookpit
+            title={this.props.appTitle}
+            showPersons={this.state.showPersons}
+            personsLength={this.state.persons.length}
+            clicked={this.togglePersonHandler} />
+          {persons}
+        </WithClass>
+      </AuthContext.Provider>
     );
   }
 }

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import classes from './Cookpit.css'
+import AuthContext from '..//../context/auth-context'
 
 const cookpit = (props) => {
 
@@ -33,7 +34,10 @@ const cookpit = (props) => {
             <button ref={toggleBtnRef} className={btnClass} onClick={props.clicked}>
                 Toggle
           </button>
-          <button onClick={props.login}>Log In</button>
+          <AuthContext.Consumer>
+              {(context) => <button onClick={context.login}>Log In</button>}
+          </AuthContext.Consumer>
+          
         </div>
     );
 };
