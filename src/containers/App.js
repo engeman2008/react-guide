@@ -14,7 +14,8 @@ class App extends PureComponent {
       { id: '3', name: 'Younes', age: '1' },
     ],
     otherState: 'toggle ok',
-    changeCounter: 0
+    changeCounter: 0,
+    authenticated: false
   };
 
   componentDidMount = () => {
@@ -55,6 +56,10 @@ class App extends PureComponent {
     this.setState({ showPersons: !doesShow });
   };
 
+  loginHandler = () => {
+    this.setState({authenticated: true});
+  };
+
   render() {
     console.log('App.js render')
     let persons = null;
@@ -63,6 +68,7 @@ class App extends PureComponent {
         persons={this.state.persons}
         clicked={this.deletePersonHandler}
         changed={this.nameChangedHandler}
+        isAuthenticated={this.state.authenticated}
       />;
     }
 
@@ -72,7 +78,8 @@ class App extends PureComponent {
           title={this.props.appTitle}
           showPersons={this.state.showPersons}
           personsLength={this.state.persons.length}
-          clicked={this.togglePersonHandler} />
+          clicked={this.togglePersonHandler}
+          login={this.loginHandler} />
         {persons}
       </WithClass>
     );

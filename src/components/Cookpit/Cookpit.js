@@ -33,6 +33,7 @@ const cookpit = (props) => {
             <button ref={toggleBtnRef} className={btnClass} onClick={props.clicked}>
                 Toggle
           </button>
+          <button onClick={props.login}>Log In</button>
         </div>
     );
 };

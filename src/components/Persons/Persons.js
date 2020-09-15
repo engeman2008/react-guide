@@ -8,7 +8,8 @@ const persons = (props) => props.persons.map((person, index) => {
         changed={(event) => props.changed(event, person.id)}
         name={person.name}
         age={person.age}
-        key={person.id} />
+        key={person.id}
+        isAuth={props.isAuthenticated} />
 });
 
 export default persons;
