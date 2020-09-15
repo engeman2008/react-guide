@@ -1,14 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import classes from './Cookpit.css'
 
 const cookpit = (props) => {
 
+    const toggleBtnRef = useRef(null) //React.createRef();
+
     useEffect(() => {
+        toggleBtnRef.current.click()
         console.log('cookpit useeffect')
         return () => {
             console.log('cookpit useeffect clean')
         };
-    });
+    }, []);
 
     // let classes = ['red', 'blue'].join(' ');
     const assignedClasses = [];
@@ -27,7 +30,7 @@ const cookpit = (props) => {
         <div className={classes.Cookpit}>
             <h1>{props.title}</h1>
             <p className={assignedClasses.join(' ')}>this is working</p>
-            <button className={btnClass} onClick={props.clicked}>
+            <button ref={toggleBtnRef} className={btnClass} onClick={props.clicked}>
                 Toggle
           </button>
         </div>
